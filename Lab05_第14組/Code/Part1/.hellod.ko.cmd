@@ -1,0 +1,1 @@
+cmd_/home/tx2/Desktop/desktop/kernel_test_1/hellod.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -z noexecstack   --build-id  -T ./scripts/module-common.lds -o /home/tx2/Desktop/desktop/kernel_test_1/hellod.ko /home/tx2/Desktop/desktop/kernel_test_1/hellod.o /home/tx2/Desktop/desktop/kernel_test_1/hellod.mod.o;  true

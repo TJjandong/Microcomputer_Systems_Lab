@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=\, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css">
+	<title> Lab04 </title>
+</head>
+<body>
+	<div class="container"><div class="content">
+		<div class="title" title="Lab04">Lab04 第14組</div>
+		<hr>
+		<form action="/setled" method="post">
+			<div class="led-checkbox">
+				<input id="led1" name="led1" type="checkbox" value="on">
+				<label for="led1">LED 1</label>
+			</div>
+			<div class="led-checkbox">
+				<input id="led2" name="led2" type="checkbox" value="on">
+				<label for="led2">LED 2</label>
+			</div>
+			<div class="led-checkbox">
+				<input id="led3" name="led3" type="checkbox" value="on">
+				<label for="led3">LED 3</label>
+			</div>
+			<div class="led-checkbox">
+				<input id="led4" name="led4" type="checkbox" value="on">
+				<label for="led4">LED 4</label>
+			</div>
+			<input class="submit-button" type="submit" id="set-led" value="set led">
+		</form>
+		<hr>
+		<form action="/setblink" method="post">
+			<div>
+				<label for="set_interval">set interval</label>
+				<input class="number-blinks" type="number" id="set_interval" name="set_interval" min="100" step="100" value="1000" required>
+			</div>
+			<br>
+			<div>
+				<label for="set_count">set count</label>
+				<input class="number-blinks" type="number" id="set_count" name="set_count" min="0" value="5" required>
+			</div>
+			</br>
+			<input class="submit-button" type="submit" id="set-blink" value="set blink"></br>
+		</form>
+	</div></div>
+</body>
+</html>

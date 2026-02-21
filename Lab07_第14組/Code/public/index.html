@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Lab 7 - 光敏電阻 ADC 監控</title>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Title Section -->
+            <div class="title">Lab 7 光敏電阻監控</div>
+            <div class="subtitle">Photoresistor ADC Monitoring System</div>
+            
+            <hr>
+            
+            <!-- Mode Selection Section -->
+            <div class="section mode-section">
+                <h3>請選擇模式</h3>
+                <div class="mode-selector">
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="detect" id="mode-detect" checked>
+                        <span class="radio-custom"></span>
+                        DETECT (自動感測)
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="no_detect" id="mode-no-detect">
+                        <span class="radio-custom"></span>
+                        NO_DETECT (手動控制)
+                    </label>
+                </div>
+                <button class="submit-button" id="btn-switch-mode" onclick="switchMode()">
+                    Submit (切換模式)
+                </button>
+            </div>
+            
+            <hr>
+            
+            <!-- DETECT Mode Panel (Auto Sensing) -->
+            <div class="section panel" id="detect-panel">
+                <h3>感測器偵測中 (Dynamic Blink)</h3>
+                <p class="panel-description">LED 閃爍頻率隨亮度改變</p>
+                
+                <!-- ADC Value Display -->
+                <div class="adc-display">
+                    <div class="adc-value" id="adc-value">---</div>
+                    <div class="adc-label">ADC 數值</div>
+                </div>
+                
+                <!-- Light Level Indicator -->
+                <div class="level-display">
+                    <span class="level-label">光線等級：</span>
+                    <span class="level-value" id="light-level">---</span>
+                </div>
+                
+                <!-- LED Status Display -->
+                <div class="led-status-display">
+                    <div class="led-indicator">
+                        <div class="led-light" id="led1-indicator"></div>
+                        <span>LED 1</span>
+                    </div>
+                    <div class="led-indicator">
+                        <div class="led-light" id="led2-indicator"></div>
+                        <span>LED 2</span>
+                    </div>
+                </div>
+                
+                <!-- Threshold Info -->
+                <div class="threshold-info">
+                    <small>
+                        亮 (Bright): ADC &lt; 300 → 全滅 | 
+                        中 (Medium): 300-600 → LED1亮 | 
+                        暗 (Dark): &gt; 600 → 全亮
+                    </small>
+                </div>
+            </div>
+            
+            <!-- NO_DETECT Mode Panel (Manual Control) -->
+            <div class="section panel" id="no-detect-panel" style="display: none;">
+                <h3>手動控制面板</h3>
+                <p class="panel-description">選擇 LED 狀態後點擊送出</p>
+                
+                <!-- LED 1 Control -->
+                <div class="led-control">
+                    <span class="led-control-label">LED 1 (Pin 7):</span>
+                    <label class="radio-label small">
+                        <input type="radio" name="led1" value="on" id="led1-on">
+                        <span class="radio-custom"></span>
+                        ON
+                    </label>
+                    <label class="radio-label small">
+                        <input type="radio" name="led1" value="off" id="led1-off" checked>
+                        <span class="radio-custom"></span>
+                        OFF
+                    </label>
+                    <button class="submit-button small" onclick="setLed(1)">送出</button>
+                </div>
+                
+                <!-- LED 2 Control -->
+                <div class="led-control">
+                    <span class="led-control-label">LED 2 (Pin 12):</span>
+                    <label class="radio-label small">
+                        <input type="radio" name="led2" value="on" id="led2-on">
+                        <span class="radio-custom"></span>
+                        ON
+                    </label>
+                    <label class="radio-label small">
+                        <input type="radio" name="led2" value="off" id="led2-off" checked>
+                        <span class="radio-custom"></span>
+                        OFF
+                    </label>
+                    <button class="submit-button small" onclick="setLed(2)">送出</button>
+                </div>
+                
+                <!-- Status Message Display -->
+                <div class="status-message" id="status-message">
+                    <!-- Status messages will appear here -->
+                </div>
+            </div>
+            
+            <hr>
+            
+            <!-- Footer Info -->
+            <div class="footer-info">
+                <small id="connection-status">狀態: 連線中...</small>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript for AJAX and interactivity -->
+    <script src="index_client.js"></script>
+</body>
+</html>

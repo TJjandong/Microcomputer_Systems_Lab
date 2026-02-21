@@ -1,0 +1,1 @@
+cmd_/home/tx2/Desktop/Part2/demo.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -z noexecstack   --build-id  -T ./scripts/module-common.lds -o /home/tx2/Desktop/Part2/demo.ko /home/tx2/Desktop/Part2/demo.o /home/tx2/Desktop/Part2/demo.mod.o;  true

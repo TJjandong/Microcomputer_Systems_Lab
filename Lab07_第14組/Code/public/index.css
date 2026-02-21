@@ -1,0 +1,454 @@
+/*
+ * index.css - Styles for Lab 7 Photoresistor ADC Monitoring
+ * Based on Lab 4 styling with additions for new components
+ */
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
+
+@font-face {
+    font-family: 'myfont';
+    src: url('/VeraMono.ttf') format('truetype');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    display: table;
+    font-weight: 100;
+    font-family: 'myfont', 'Courier New', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    background-attachment: fixed;
+    color: #eee;
+    min-height: 100vh;
+}
+
+/* =============================================================================
+   LAYOUT
+   ============================================================================= */
+
+.container {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 20px;
+}
+
+.content {
+    text-align: center;
+    display: inline-block;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+}
+
+/* =============================================================================
+   TYPOGRAPHY
+   ============================================================================= */
+
+.title {
+    font-size: 42px;
+    color: #00A2E8;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 162, 232, 0.3);
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #00A2E8;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+/* =============================================================================
+   SECTIONS & PANELS
+   ============================================================================= */
+
+.section {
+    margin: 15px 0;
+}
+
+.panel {
+    background: rgba(22, 33, 62, 0.8);
+    border: 1px solid #2a3a5a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.panel-description {
+    color: #888;
+    font-size: 13px;
+    margin: 5px 0 15px 0;
+}
+
+/* =============================================================================
+   MODE SELECTOR (Radio Buttons)
+   ============================================================================= */
+
+.mode-selector {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.radio-label:hover {
+    color: #00A2E8;
+}
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    transition: border-color 0.3s;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+    border-color: #00A2E8;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #00A2E8;
+    border-radius: 50%;
+}
+
+.radio-label.small {
+    font-size: 13px;
+    margin: 0 10px;
+}
+
+.radio-label.small .radio-custom {
+    width: 16px;
+    height: 16px;
+}
+
+.radio-label.small input[type="radio"]:checked + .radio-custom::after {
+    width: 8px;
+    height: 8px;
+}
+
+/* =============================================================================
+   BUTTONS
+   ============================================================================= */
+
+.submit-button {
+    cursor: pointer;
+    outline: 0;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    background-color: transparent;
+    border: 2px solid #00A2E8;
+    padding: 10px 25px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: #00A2E8;
+    font-family: inherit;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    color: #fff;
+    background-color: #00A2E8;
+    box-shadow: 0 0 15px rgba(0, 162, 232, 0.4);
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+}
+
+.submit-button.small {
+    padding: 6px 15px;
+    font-size: 12px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+/* =============================================================================
+   ADC VALUE DISPLAY (DETECT Mode)
+   ============================================================================= */
+
+.adc-display {
+    margin: 25px 0;
+}
+
+.adc-value {
+    font-size: 72px;
+    font-weight: bold;
+    color: #00A2E8;
+    text-shadow: 0 0 20px rgba(0, 162, 232, 0.5);
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.adc-value.bright {
+    color: #4ade80;
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+}
+
+.adc-value.medium {
+    color: #fbbf24;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.adc-value.dark {
+    color: #f87171;
+    text-shadow: 0 0 20px rgba(248, 113, 113, 0.5);
+}
+
+.adc-label {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* =============================================================================
+   LIGHT LEVEL DISPLAY
+   ============================================================================= */
+
+.level-display {
+    margin: 15px 0;
+    font-size: 16px;
+}
+
+.level-label {
+    color: #888;
+}
+
+.level-value {
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(0, 162, 232, 0.2);
+    color: #00A2E8;
+}
+
+.level-value.bright {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.level-value.medium {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+.level-value.dark {
+    background: rgba(248, 113, 113, 0.2);
+    color: #f87171;
+}
+
+/* =============================================================================
+   LED STATUS INDICATORS
+   ============================================================================= */
+
+.led-status-display {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.led-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.led-light {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #333;
+    border: 2px solid #555;
+    transition: all 0.3s;
+}
+
+.led-light.on {
+    background: #4ade80;
+    border-color: #4ade80;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.8), 0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+.led-indicator span {
+    font-size: 12px;
+    color: #888;
+}
+
+/* =============================================================================
+   THRESHOLD INFO
+   ============================================================================= */
+
+.threshold-info {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.threshold-info small {
+    color: #666;
+    font-size: 11px;
+}
+
+/* =============================================================================
+   LED MANUAL CONTROL (NO_DETECT Mode)
+   ============================================================================= */
+
+.led-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.led-control-label {
+    color: #00A2E8;
+    font-size: 14px;
+    min-width: 120px;
+    text-align: left;
+}
+
+/* =============================================================================
+   STATUS MESSAGE
+   ============================================================================= */
+
+.status-message {
+    margin-top: 20px;
+    min-height: 50px;
+}
+
+.status-item {
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-size: 13px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.status-item.success {
+    background: rgba(74, 222, 128, 0.2);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    color: #4ade80;
+}
+
+.status-item.error {
+    background: rgba(248, 113, 113, 0.2);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    color: #f87171;
+}
+
+.status-item.info {
+    background: rgba(0, 162, 232, 0.2);
+    border: 1px solid rgba(0, 162, 232, 0.4);
+    color: #00A2E8;
+}
+
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
+
+.footer-info {
+    margin-top: 10px;
+}
+
+.footer-info small {
+    color: #555;
+    font-size: 11px;
+}
+
+#connection-status.connected {
+    color: #4ade80;
+}
+
+#connection-status.error {
+    color: #f87171;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
+
+@media (max-width: 500px) {
+    .title {
+        font-size: 28px;
+    }
+    
+    .adc-value {
+        font-size: 48px;
+    }
+    
+    .mode-selector {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .led-control {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .led-control-label {
+        text-align: center;
+    }
+}
